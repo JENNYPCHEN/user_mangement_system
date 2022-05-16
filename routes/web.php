@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('homepage');})->name('index');
+Route::get('/', [UserController::class,'index'])->name('index');
+Route::get('/se-connecter',[UserController::class,'loginPage'])->name('login')->middleware('guest');
+Route::post('/authentifier', [UserController::class, 'authenticate'])->name('loginAction')->middleware('guest');
+Route::get('/tableau-de-bord',[UserController::class,'dashboard'])->name('dashboard')->middleware('auth');
+Route::post('/deconnecter',[UserController::class,'logout'])->name('logout')->middleware('auth');;
