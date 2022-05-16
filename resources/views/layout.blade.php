@@ -13,7 +13,6 @@
   <!-- Boxicon cdn -->
   <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
   <!-- main css -->
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
 </head>
 
@@ -33,7 +32,7 @@
             </li>
             @guest
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Se Connecter</a>
+              <a class="nav-link" aria-current="page" href="{{route('login')}}">Se Connecter</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Inscription</a>
@@ -41,23 +40,33 @@
             @endguest
             @auth
             <!--admin-->
-             @if(auth()->user()->is_admin==="1")
+            @if(auth()->user()->is_admin===1)
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">géer les comptes</a>
+              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">géer les comptes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="#">créer un compte</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">déconnecter</a>
+              <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
+                @csrf
+                <button class="btn btn-primary btn-sm" type="submit">
+                  déconnecter
+                </button>
+              </form>
             </li>
             @else
             <!--user-->
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">votre compte</a>
+              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">votre compte</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">déconnecter</a>
+              <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
+                @csrf
+                <button class="btn btn-primary btn-sm" type="submit">
+                  déconnecter
+                </button>
+              </form>
             </li>
             @endif
             @endauth
@@ -68,7 +77,7 @@
     @if(session()->has('message'))
     <!--flash message-->
     <div class="alert alert-primary alert-dismissible fade show container" role="alert">
-      <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+      {{session('message')}}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
@@ -83,6 +92,6 @@
 <!-- bootstrap cdn -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> <!-- main js-->
 <!-- main js-->
-<script src="assets/js/main.js"></script>
+<script src="js/all.js"></script>
 
 </html>
