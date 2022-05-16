@@ -42,26 +42,31 @@
             <!--admin-->
             @if(auth()->user()->is_admin===1)
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">géer les comptes</a>
+              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">géer les comptes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="#">créer un compte</a>
             </li>
-            <li class="nav-item" >
-              <form id="logout"class="nav-link" method="POST" action="{{route('logout')}}">
+            <li class="nav-item">
+              <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
                 @csrf
-                <button class="btn btn-primary btn-sm"type="submit">
+                <button class="btn btn-primary btn-sm" type="submit">
                   déconnecter
-</button>
+                </button>
               </form>
             </li>
             @else
             <!--user-->
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">votre compte</a>
+              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">votre compte</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">déconnecter</a>
+              <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
+                @csrf
+                <button class="btn btn-primary btn-sm" type="submit">
+                  déconnecter
+                </button>
+              </form>
             </li>
             @endif
             @endauth

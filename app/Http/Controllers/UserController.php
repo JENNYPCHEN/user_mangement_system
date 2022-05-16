@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,11 +19,8 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function authenticate(Request $request) {
-        $loginForm=$request->validate([
-            'name' => 'required',
-            'password' => 'required'
-        ]);
+    public function authenticate(LoginRequest $request) {
+        $loginForm = $request->validated();
         if(auth()->attempt($loginForm)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard')->with('message', 'Vous êtes connecté');
@@ -32,7 +32,7 @@ class UserController extends Controller
             $profiles=auth()->user();
         }
         if(auth()->user()->is_admin===1){
-            $profiles=User::all();
+            $profiles=DB::table('users')->where('is_admin', 0)->get();
         }
         return view('dashboard',compact('profiles'));
     }
@@ -41,6 +41,14 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/')->with('message', 'Vous êtes déconnecté');
-
     }
+    public function editPage(User $user) {
+        return view('edit', ['user' => $user]);
+    }
+    public function update(EditRequest $request, User $user) {
+        $editForm = $request->validated();
+        $user->update($editForm);
+        return redirect()->route('dashboard')->with('message', 'le détail du compte a été modifié avec succès');
+    }
+
 }
