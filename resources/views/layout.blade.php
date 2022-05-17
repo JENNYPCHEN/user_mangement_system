@@ -42,7 +42,7 @@
             <!--admin-->
             @if(auth()->user()->is_admin===1)
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">géer les comptes</a>
+              <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">gérer les comptes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="{{route('signUp')}}">créer un compte</a>
@@ -51,7 +51,7 @@
               <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
                 @csrf
                 <button class="btn btn-primary btn-sm" type="submit">
-                  déconnecter
+                  se déconnecter
                 </button>
               </form>
             </li>
@@ -64,7 +64,7 @@
               <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
                 @csrf
                 <button class="btn btn-primary btn-sm" type="submit">
-                  déconnecter
+                  se déconnecter
                 </button>
               </form>
             </li>
@@ -92,9 +92,12 @@
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script> <!-- main js-->
+
   <!-- bootstrap cdn -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> <!-- main js-->
+
 <!-- main js-->
-<script src="js/all.js"></script>
+<script src="{{route('index')}}/js/all.js"></script>
 
 </html>

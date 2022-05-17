@@ -30,4 +30,16 @@ class RegisterRequest extends FormRequest
             'password' => 'required|confirmed|min:5'
         ];
     }
+      /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'le nom d \'utilisateur existe déjà dans le système.',
+            'email.unique' => 'l\'adresse email existent déjà dans le système.'
+        ];
+    }
 }
