@@ -11,8 +11,10 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_database()
     {
-        $this->assertTrue(true);
+        $this->assertDatabaseHas('users',[
+            'name'=>'admin']
+        );
     }
 }
