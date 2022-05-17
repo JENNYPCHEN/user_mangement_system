@@ -35,7 +35,7 @@
               <a class="nav-link" aria-current="page" href="{{route('login')}}">Se Connecter</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Inscription</a>
+              <a class="nav-link" href="{{route('signUp')}}">Inscription</a>
             </li>
             @endguest
             @auth
@@ -45,7 +45,7 @@
               <a class="nav-link" aria-current="page" href="{{route('dashboard')}}">géer les comptes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">créer un compte</a>
+              <a class="nav-link" aria-current="page" href="{{route('signUp')}}">créer un compte</a>
             </li>
             <li class="nav-item">
               <form id="logout" class="nav-link" method="POST" action="{{route('logout')}}">
@@ -88,8 +88,11 @@
   </main>
 </body>
 <!--jquery cdn-->
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<!-- bootstrap cdn -->
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <!-- bootstrap cdn -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> <!-- main js-->
 <!-- main js-->
 <script src="js/all.js"></script>

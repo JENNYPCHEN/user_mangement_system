@@ -101,6 +101,6 @@ class UserPolicy
      */
     public function forceDelete(User $user,  User $userProfile)
     {
-        //
+        return $user->is_adlmin===1;
     }
 }
