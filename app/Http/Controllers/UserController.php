@@ -29,7 +29,10 @@ class UserController extends Controller
     }
     public function editPage(User $user)
     {
-        return view('edit', ['user' => $user]);
+      if(auth()->user()->is_admin==true&& $user->is_admin==true){
+          abort(403);    
+      }
+        return view('edit', ['user' =>$user]);
     }
     public function dashboard()
     {
@@ -84,7 +87,9 @@ class UserController extends Controller
 
     public function bin(User $user)
     {
-
+        if(auth()->user()->is_admin==true&& $user->is_admin==true){
+            abort(403);    
+        }
         $user->delete();
         if (auth()->user()->id == $user->id) {
             return redirect('/')->with('message', 'Votre compte a été supprimé');
@@ -94,7 +99,9 @@ class UserController extends Controller
     }
 
     public function delete(User $user)
-    {
+    {   if(auth()->user()->is_admin==true&& $user->is_admin==true){
+        abort(403);    
+    }
         $user->forceDelete();
         return redirect()->route('dashboard')->with('message', 'le compte a été supprimé');
     }

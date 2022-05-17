@@ -31,11 +31,7 @@ $().ready(function() {
                 required: "veuillez entrer un mot de passe d'au moins 5 caractères",
                 minlength:"veuillez entrer un mot de passe d'au moins 5 caractères"
             },
-            password_confirmation: {
-                required: "veuillez entrer un mot de passe d'au moins 5 caractères",
-                minlength:"veuillez entrer un mot de passe d'au moins 5 caractères",
-                equalTo: "Veuillez entrer le même mot de passe "
-            },
+            password_confirmation: "Veuillez entrer le même mot de passe ",
         },
     })
 });

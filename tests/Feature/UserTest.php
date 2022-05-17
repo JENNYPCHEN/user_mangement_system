@@ -40,7 +40,10 @@ class UserTest extends TestCase
     public function test_dashboard_for_visiter(){
         $response = $this->get('/tableau-de-bord');
         $response->assertRedirect('/se-connecter');
-       
+    }
+    public function test_editPage_for_visiter(){
+        $response = $this->get('/modifier/2');
+        $response->assertStatus('403');
     }
     public function test_homepage_for_user(){
         $user = User::factory()->create();
