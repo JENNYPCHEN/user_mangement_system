@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class,'index'])->name('index');
+Route::get('/inscription',[UserController::class,'signupPage'])->name('signUp')->middleware('non.user');
 Route::get('/se-connecter',[UserController::class,'loginPage'])->name('login')->middleware('guest');
 Route::post('/authentifier', [UserController::class, 'authenticate'])->name('loginAction')->middleware('guest');
 Route::get('/tableau-de-bord',[UserController::class,'dashboard'])->name('dashboard')->middleware('auth');

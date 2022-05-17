@@ -18,6 +18,9 @@ class UserController extends Controller
     public function loginPage(){
         return view('login');
     }
+    public function signupPage() {
+        return view('signup');
+    }
 
     public function authenticate(LoginRequest $request) {
         $loginForm = $request->validated();
@@ -28,10 +31,10 @@ class UserController extends Controller
         return back()->withErrors(['error' => 'Identifiants non valides']);
     }
     public function dashboard(){
-        if(auth()->user()->is_admin===0){
+        if(auth()->user()->is_admin==0){
             $profiles=auth()->user();
         }
-        if(auth()->user()->is_admin===1){
+        if(auth()->user()->is_admin==1){
             $profiles=DB::table('users')->where('is_admin', 0)->get();
         }
         return view('dashboard',compact('profiles'));
@@ -47,6 +50,7 @@ class UserController extends Controller
     }
     public function update(EditRequest $request, User $user) {
         $editForm = $request->validated();
+        $editForm['password'] = bcrypt($editForm['password']);
         $user->update($editForm);
         return redirect()->route('dashboard')->with('message', 'le détail du compte a été modifié avec succès');
     }

@@ -14,10 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      @if($profiles->count()==0)
-      <p> aucun utilisateur</p>
-      @endif
-      @if($profiles->count()==1)
+      @if(auth()->user()->is_admin===0)
       <tr>
         <th scope="row">{{$profiles->id}}</th>
         <td>{{$profiles->name}}</td>
@@ -25,10 +22,12 @@
         <td>
         <a class="btn btn-primary" href="{{route('edit', $profiles->id)}}" type="button" class="btn btn-primary" title="midifier"><i class='bx bxs-edit-alt '></i></a>
           <button href="" type="button" class="btn btn-danger" title="supprimer" onclick="return confirm('Vous êtes sûr de vouloir supprimer le compte?')"><i class='bx bx-message-square-x'></i></button>
-
         </td>
         @endif
-      @if($profiles->count()>1)
+      @if(auth()->user()->is_admin===1)
+      @if($profiles->count()==0)
+        <p>aucun d'utilisateur</p>
+      @else
       @foreach($profiles as $profile)
       <tr>
         <th scope="row">{{$profile->id}}</th>
@@ -41,6 +40,7 @@
         </td>
       </tr>
       @endforeach
+      @endif
       @endif
     
     </tbody>
