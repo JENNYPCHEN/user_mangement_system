@@ -17,8 +17,11 @@ class NonUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check()&& auth()->user()->is_Admin==0){
-            abort(403);
+        if(auth()->check()){
+            if(!auth()->user()->is_admin==1){
+                abort(403);
+            }
+            
         }
         return $next($request);
     }
