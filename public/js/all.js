@@ -36,10 +36,6 @@ $().ready(function() {
                 minlength:"veuillez entrer un mot de passe d'au moins 5 caractères",
                 equalTo: "Veuillez entrer le même mot de passe "
             },
-            submitHandler: function (form) {
-                alert('valid form');
-                return false;
-              }
         },
     })
 });

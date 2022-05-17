@@ -129,8 +129,12 @@ return [
     'url'                  => 'Le format de l\'URL n\'est pas valide.',
     'uuid'                 => 'Ce champ doit être un UUID valide',
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'unique' => 'le nom d \'utilisateur existe déjà dans le système.',
         ],
+        'email' =>[
+            'unique' =>'l\'adresse email existent déjà dans le système.'
+        ],
+
     ],
 ];
