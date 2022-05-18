@@ -12,6 +12,10 @@
     </ul>
     <h3>Usage</h3>
      <h4>1. Database set up </h4>
+     php artisan migrate
      <h4>2. Seeding the database </h4>
+     php artisan db:seed
      <h4>3. Running the app </h4>
+     php artisan serve
+
    
