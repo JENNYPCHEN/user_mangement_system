@@ -17,4 +17,5 @@ class UserTest extends TestCase
             'name'=>'admin']
         );
     }
+    
 }

@@ -3,11 +3,16 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Faker\Factory as FakerFactory;
+use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Tests\TestCase;
+
 
 class UserTest extends TestCase
 {
@@ -33,11 +38,11 @@ class UserTest extends TestCase
     }
     public function test_loginPage_for_visiter(){
         $response = $this->get('/se-connecter');
-        $response->assertSee('Connectez-Vous');
+        $response->assertViewIs('login');
     }
     public function test_signupPage_for_visiter(){
         $response = $this->get('/inscription');
-        $response->assertSee('Créer un compte'); 
+        $response->assertViewIs('signup');
     }
     public function test_dashboard_for_visiter(){
         $response = $this->get('/tableau-de-bord');
@@ -72,7 +77,8 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/tableau-de-bord');
         $response->assertSee('Gestion de comptes');
-    }
+        $response->assertSee($user->name);
+        }
     public function test_if_registration_form_work()
     {
         $this->withoutMiddleware();
@@ -100,7 +106,8 @@ class UserTest extends TestCase
     {
         $admin = User::factory()->create(['is_admin' => 1]);
         $response = $this->actingAs($admin)->get('/tableau-de-bord');
-        $response->assertSee('Gestion de comptes');
+        $response->assertViewIs('dashboard');
+        $response->assertDontSee($admin->email);
     }
     public function test_delete_for_admin(){
         $this->withoutMiddleware();
@@ -122,6 +129,7 @@ class UserTest extends TestCase
         $response = $this->actingAs($user)->delete('/corbeille/2');
         $response->assertStatus(419);
     }
+
     public function test_user_not_show_permenent_delete_button (){
 
         $user = User::factory()->create(['id'=>4]);
@@ -129,4 +137,5 @@ class UserTest extends TestCase
         $response->assertDontSee('supprimer définitivement');
 
     }
+    
 }
