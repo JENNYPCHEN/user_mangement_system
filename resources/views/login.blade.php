@@ -22,6 +22,6 @@
           </div>
           <button class="w-80 btn btn-lg btn-primary m-2" type="submit">Se Connecter</button>
         </form>
-        <a class="text-center"href="">Nouvel utilisateur ?</a>
+        <a class="text-center"href="{{route('signUp')}}">Nouvel utilisateur ?</a>
       </section>
 @endsection
