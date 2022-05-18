@@ -18,4 +18,4 @@
      <h4>3. Running the app </h4>
      php artisan serve
 
-   
+   <br><p> Feel free to let me know what you think of the project/code, any feedback will be appreciated!</p>
